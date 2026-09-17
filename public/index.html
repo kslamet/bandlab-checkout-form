@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Annual subscription checkout</title>
+
+    <!-- ui_mode: form requires the Dahlia release of Stripe.js.
+         initCheckoutFormSdk does not exist on /v3 or /clover. -->
+    <script src="https://js.stripe.com/dahlia/stripe.js"></script>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <div class="layout">
+      <!-- ================= LEFT: our own coupon UI ================= -->
+      <section class="panel" aria-labelledby="summary-heading">
+        <header>
+          <h1 id="summary-heading">Annual subscription</h1>
+          <p class="sub">USD 120.00 per year</p>
+        </header>
+
+        <!-- Custom promotion code entry. Stripe's built-in field is suppressed
+             with features.promotionCodeCollection = 'never', so this is the only
+             coupon surface on the page. -->
+        <div class="card" aria-labelledby="discount-heading">
+          <h2 id="discount-heading">Discount</h2>
+
+          <!-- Applied state -->
+          <div id="applied" class="chip" hidden>
+            <span id="applied-code"></span>
+            <button id="remove" type="button" class="link">Remove</button>
+          </div>
+
+          <!-- Entry state -->
+          <form id="code-form" class="code-entry" autocomplete="off">
+            <label class="visually-hidden" for="code-input">Promotion code</label>
+            <input
+              id="code-input"
+              type="text"
+              placeholder="Enter a code"
+              spellcheck="false"
+              autocapitalize="characters"
+            />
+            <button id="apply" type="submit">Apply</button>
+          </form>
+
+          <p class="hint">
+            Try
+            <button type="button" class="link quick" data-code="20OFF">20OFF</button>
+            or
+            <button type="button" class="link quick" data-code="25OFF">25OFF</button>
+          </p>
+
+          <p id="discount-error" class="error" role="alert" aria-live="polite"></p>
+        </div>
+
+        <!-- Order summary, read from actions.getSession() -->
+        <dl class="totals" id="totals">
+          <div class="row"><dt>Subtotal</dt><dd id="t-subtotal">—</dd></div>
+          <div class="row" id="discount-row" hidden>
+            <dt>Discount</dt><dd id="t-discount">—</dd>
+          </div>
+          <div class="row total"><dt>Total due today</dt><dd id="t-total">—</dd></div>
+        </dl>
+      </section>
+
+      <!-- ================= RIGHT: Stripe embedded form ================= -->
+      <section class="panel form-panel" aria-labelledby="pay-heading">
+        <h2 id="pay-heading">Payment details</h2>
+        <div id="checkout-form"></div>
+        <p id="fatal" class="error" role="alert"></p>
+        <p id="fatal-hint" class="hint" hidden>
+          Diagnostics: <a href="/healthz" target="_blank" rel="noopener">/healthz</a></p>
+      </section>
+    </div>
+
+    <script type="module" src="/checkout.js"></script>
+  </body>
+</html>

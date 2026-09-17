@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Order result</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <main>
+      <h1 id="heading">Checking your order…</h1>
+      <pre id="detail"></pre>
+      <p><a href="/">Start again</a></p>
+    </main>
+
+    <script>
+      const sessionId = new URLSearchParams(location.search).get('session_id');
+
+      fetch(`/session-status?session_id=${encodeURIComponent(sessionId)}`)
+        .then((r) => r.json())
+        .then((data) => {
+          document.getElementById('heading').textContent =
+            data.payment_status === 'paid' ? 'Subscription active' : `Status: ${data.status}`;
+          document.getElementById('detail').textContent = JSON.stringify(data, null, 2);
+        })
+        .catch((error) => {
+          document.getElementById('heading').textContent = 'Could not load the order';
+          document.getElementById('detail').textContent = error.message;
+        });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,20 @@
+{
+  "name": "bandlab-checkout-form",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Stripe embedded form (ui_mode: form) checkout with a pre-applied 20OFF coupon the customer can remove and replace with 25OFF",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "dotenv": "^17.0.0",
+    "express": "^5.1.0",
+    "stripe": "^19.0.0"
+  }
+}
