@@ -1,8 +1,7 @@
 # Embedded form checkout with a removable coupon
 
 Node + Express demo of Stripe's **embedded form** (`ui_mode: 'form'`) selling the
-annual subscription product created in Bob, with `20OFF` applied on load that the
-customer can remove and replace with `25OFF`.
+annual subscription product, with `20OFF` applied on load that the customer can remove and replace with `25OFF`.
 
 ## Run it
 
