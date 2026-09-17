@@ -3,6 +3,20 @@
 Node + Express demo of Stripe's **embedded form** (`ui_mode: 'form'`) selling the
 annual subscription product, with `20OFF` applied on load that the customer can remove and replace with `25OFF`.
 
+## Objects which need to be pre-created
+
+in test mode:
+
+| Object | ID |
+|---|---|
+| Product | `prod_xxx` (please create a product) |
+| Price | `price_xxx` (please create a recurring price, e.g. USD 120 / year) |
+| Promotion code | `20OFF` (please create the promotion codes beforehand |
+| Promotion code | `25OFF` |
+
+`applyPromotionCode` takes the **code string**, not the `promo_...` ID, so only the
+price ID is needed in `.env`.
+
 ## Run it
 
 ```bash
@@ -102,16 +116,3 @@ if you need a later Dahlia release. `/healthz` reports the version in use.
 | `public/return.html` | Post-payment result |
 | `.env.example` | Placeholders, including the Bob price ID |
 
-## Objects this expects
-
-in test mode:
-
-| Object | ID |
-|---|---|
-| Product | `prod_xxx` (please create a product) |
-| Price | `price_xxx` (please create a recurring price, e.g. USD 120 / year) |
-| Promotion code | `20OFF` (please create the promotion codes beforehand |
-| Promotion code | `25OFF` |
-
-`applyPromotionCode` takes the **code string**, not the `promo_...` ID, so only the
-price ID is needed in `.env`.
