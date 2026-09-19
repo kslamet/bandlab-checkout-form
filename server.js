@@ -134,9 +134,7 @@ route(
       allow_promotion_codes: true,
 
       // Required if Managed Payments is enabled by default on the account.
-      // ui_mode "form" is incompatible with Managed Payments, which returns:
-      // "Invalid ui_mode: form. Managed Payments currently only supports
-      //  ui_mode: hosted_page and ui_mode: embedded_page."
+      // ui_mode "form" requires gating to be compatible with Managed Payments, request this from your Stripe contact.
       managed_payments: { enabled: false },
 
       return_url: `${originOf(req)}/return.html?session_id={CHECKOUT_SESSION_ID}`,
