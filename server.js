@@ -135,7 +135,7 @@ route(
 
       // Required if Managed Payments is enabled by default on the account.
       // ui_mode "form" requires gating to be compatible with Managed Payments, request this from your Stripe contact.
-      managed_payments: { enabled: false },
+      managed_payments: { enabled: true },
 
       return_url: `${originOf(req)}/return.html?session_id={CHECKOUT_SESSION_ID}`,
 
